@@ -1,9 +1,10 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
-import LoginForm from "../../components/LoginForm";
+import { Redirect, Link } from "react-router-dom";
+import LoginForm from "../../components/LoginForm/LoginForm";
 import useFetch from "use-http";
 import { useStore } from "../../hooks/useStore";
 import { login } from "../../actions";
+import Wrapper from './elements/Wrapper';
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 function Login() {
@@ -19,14 +20,19 @@ function Login() {
       console.log("login success", response);
       return dispatch(login(loggedInUser));
     }
-    console.log('login failed')
+    console.log("login failed");
     return dispatch(login(null));
   };
 
   if (user) {
     return <Redirect to="/" />;
   }
-  return <LoginForm submit={submit} />;
+  return (
+    <Wrapper>
+      <LoginForm submit={submit} />
+      <Link to="/register">Register</Link>
+    </Wrapper>
+  );
 }
 
 export default Login;
