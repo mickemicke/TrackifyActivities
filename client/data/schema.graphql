@@ -1,0 +1,32 @@
+schema {
+  query: RootQueryType
+  mutation: Mutation
+}
+
+"""Exposes a URL that specifies the behaviour of this scalar."""
+directive @specifiedBy(
+  """The URL that specifies the behaviour of this scalar."""
+  url: String!
+) on SCALAR
+
+type Activity {
+  id: ID
+  date: String
+  tags: Int
+  createdAt: String
+  updatedAt: String
+  title: String
+  body: String
+}
+
+type Mutation {
+  addActivity(date: String!, title: String!, tags: [String], body: String): Activity
+  editActivity(id: String!, date: String, title: String, tags: [String], body: String): Activity
+  deleteActivity(id: String!): Activity
+}
+
+type RootQueryType {
+  activity(id: ID): Activity
+  activities: [Activity]
+}
+

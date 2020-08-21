@@ -14,7 +14,7 @@ function App() {
   const { state } = useStore();
   const { user } = state;
   const { loading } = useAuthCheck();
-  console.log("user", user);
+  // console.log("user", user);
   if (loading && !user) {
     // for now this fixes the login form blinking into view
     // replace with a beautiful spinner

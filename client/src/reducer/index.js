@@ -2,6 +2,7 @@ import { LOGIN, LOGOUT } from "../constants";
 
 export const initialState = {
   user: null,
+  month: [],
 };
 
 function reducer(state, action) {
