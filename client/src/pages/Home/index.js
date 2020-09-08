@@ -5,9 +5,11 @@ import { useStore } from "../../hooks/useStore";
 import { QueryRenderer } from "react-relay";
 import graphql from "babel-plugin-relay/macro";
 import environment from '../../relay/index';
+import Month from '../../components/Month';
 
 function Home() {
   const { state } = useStore();
+  const { months } = state;
   return (
     <QueryRenderer
       environment={environment}
@@ -32,7 +34,7 @@ function Home() {
           <ColumnWrapper>
             {console.log("props", props)}
             <Navigation />
-            <div>stuff</div>
+            {months.map((m) => <Month {...m} />)}
           </ColumnWrapper>
         );
       }}
