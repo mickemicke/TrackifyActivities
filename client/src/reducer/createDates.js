@@ -1,4 +1,4 @@
-import moment from "../moment";
+import dayjs from "../dayjs";
 import range from "lodash/range";
 
 const numberOfMonths = range(0, 12);
@@ -62,14 +62,12 @@ function createWeeks(startOfMonth, totalDays, weeks = [], daysCounter = 0) {
  * Returns a year worth of months with weeks
  * @param {String} year
  */
-function createDates(year = moment().year().toString()) {
+function createDates(year = dayjs().year().toString()) {
   return numberOfMonths.reduce((acc, m) => {
-    // const month = moment(year).month(m);
-    const daysInMonth = moment(year).month(m).daysInMonth();
-    const startOfMonth = moment(year).month(m).weekday();
-    const endOfMonth = moment(year).month(m).endOf("month").weekday();
+    const daysInMonth = dayjs().year(year).month(m).daysInMonth();
+    const startOfMonth = dayjs().year(year).month(m).weekday();
+    const endOfMonth = dayjs().year(year).month(m).endOf("month").weekday();
     const weeks = createWeeks(startOfMonth, daysInMonth, []);
-    // console.log("weeks", weeks);
     return [
       ...acc,
       {
