@@ -32,6 +32,14 @@ const RootQuery = new GraphQLObjectType({
         return ActivityModel.find({ username: args.username });
       },
     },
+    activityByDate: {
+      type: ActivityType,
+      args: { date: { type: GraphQLString } },
+      resolve(parent, args) {
+        return ActivityModel.findOne({
+          date: args.date,
+          username: args.username,
+        });
       },
     },
   },
