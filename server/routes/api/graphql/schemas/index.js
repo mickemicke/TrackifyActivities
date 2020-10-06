@@ -7,7 +7,13 @@ const {
   deleteActivity,
 } = require("../mutations/activity");
 
-const { GraphQLObjectType, GraphQLID, GraphQLSchema, GraphQLList } = graphql;
+const {
+  GraphQLObjectType,
+  GraphQLID,
+  GraphQLSchema,
+  GraphQLList,
+  GraphQLString,
+} = graphql;
 
 const RootQuery = new GraphQLObjectType({
   name: "RootQueryType",
@@ -21,8 +27,11 @@ const RootQuery = new GraphQLObjectType({
     },
     activities: {
       type: new GraphQLList(ActivityType),
-      resolve() {
-        return ActivityModel.find({});
+      args: { username: { type: GraphQLString } },
+      resolve(parent, args) {
+        return ActivityModel.find({ username: args.username });
+      },
+    },
       },
     },
   },

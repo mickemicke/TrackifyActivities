@@ -12,6 +12,7 @@ const ActivityType = new GraphQLObjectType({
     updatedAt: { type: GraphQLString },
     title: { type: GraphQLString },
     body: { type: GraphQLString },
+    username: { type: GraphQLString },
     // details: { type: GraphQLObjectType },
   }),
 });

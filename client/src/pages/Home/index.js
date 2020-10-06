@@ -9,20 +9,20 @@ import Month from '../../components/Month';
 
 function Home() {
   const { state } = useStore();
-  const { months } = state;
+  const { months, user } = state;
   return (
     <QueryRenderer
       environment={environment}
       query={graphql`
-        query HomeQuery($id: ID!) {
-          activity(id: $id) {
+        query HomeQuery($username: String!) {
+          activities(username: $username) {
             title
             date
             id
           }
         }
       `}
-      variables={{ id: "5f3f704503fcbb05d9834ef1" }}
+      variables={{ username: user.username }}
       render={({ error, props }) => {
         if (error) {
           return <div>Error!</div>;

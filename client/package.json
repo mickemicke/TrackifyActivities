@@ -7,6 +7,7 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "dayjs": "^1.8.35",
+    "get-graphql-schema": "^2.1.2",
     "lodash": "^4.17.20",
     "modern-css-reset": "^1.1.1",
     "react": "^16.13.1",
@@ -38,6 +39,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "schema": "get-graphql-schema http://localhost:4040/api/graphql > data/schema.graphql",
     "relay": "relay-compiler --src ./src --schema ./data/schema.graphql"
   },
   "eslintConfig": {

@@ -17,6 +17,7 @@ type Activity {
   updatedAt: String
   title: String
   body: String
+  username: String
 }
 
 type Mutation {
@@ -27,6 +28,7 @@ type Mutation {
 
 type RootQueryType {
   activity(id: ID): Activity
-  activities: [Activity]
+  activities(username: String): [Activity]
+  activityByDate(date: String): Activity
 }
 

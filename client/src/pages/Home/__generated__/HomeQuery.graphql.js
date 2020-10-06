@@ -8,15 +8,16 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
+type Day_activity$ref = any;
 export type HomeQueryVariables = {|
-  id: string
+  username: string
 |};
 export type HomeQueryResponse = {|
-  +activity: ?{|
+  +activities: ?$ReadOnlyArray<?{|
     +title: ?string,
     +date: ?string,
-    +id: ?string,
-  |}
+    +$fragmentRefs: Day_activity$ref,
+  |}>
 |};
 export type HomeQuery = {|
   variables: HomeQueryVariables,
@@ -27,13 +28,19 @@ export type HomeQuery = {|
 
 /*
 query HomeQuery(
-  $id: ID!
+  $username: String!
 ) {
-  activity(id: $id) {
+  activities(username: $username) {
     title
     date
+    ...Day_activity
     id
   }
+}
+
+fragment Day_activity on Activity {
+  date
+  title
 }
 */
 
@@ -42,56 +49,56 @@ var v0 = [
   {
     "defaultValue": null,
     "kind": "LocalArgument",
-    "name": "id"
+    "name": "username"
   }
 ],
 v1 = [
   {
-    "alias": null,
-    "args": [
-      {
-        "kind": "Variable",
-        "name": "id",
-        "variableName": "id"
-      }
-    ],
-    "concreteType": "Activity",
-    "kind": "LinkedField",
-    "name": "activity",
-    "plural": false,
-    "selections": [
-      {
-        "alias": null,
-        "args": null,
-        "kind": "ScalarField",
-        "name": "title",
-        "storageKey": null
-      },
-      {
-        "alias": null,
-        "args": null,
-        "kind": "ScalarField",
-        "name": "date",
-        "storageKey": null
-      },
-      {
-        "alias": null,
-        "args": null,
-        "kind": "ScalarField",
-        "name": "id",
-        "storageKey": null
-      }
-    ],
-    "storageKey": null
+    "kind": "Variable",
+    "name": "username",
+    "variableName": "username"
   }
-];
+],
+v2 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "title",
+  "storageKey": null
+},
+v3 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "date",
+  "storageKey": null
+};
 return {
   "fragment": {
     "argumentDefinitions": (v0/*: any*/),
     "kind": "Fragment",
     "metadata": null,
     "name": "HomeQuery",
-    "selections": (v1/*: any*/),
+    "selections": [
+      {
+        "alias": null,
+        "args": (v1/*: any*/),
+        "concreteType": "Activity",
+        "kind": "LinkedField",
+        "name": "activities",
+        "plural": true,
+        "selections": [
+          (v2/*: any*/),
+          (v3/*: any*/),
+          {
+            "args": null,
+            "kind": "FragmentSpread",
+            "name": "Day_activity"
+          }
+        ],
+        "storageKey": null
+      }
+    ],
     "type": "RootQueryType",
     "abstractKey": null
   },
@@ -100,19 +107,40 @@ return {
     "argumentDefinitions": (v0/*: any*/),
     "kind": "Operation",
     "name": "HomeQuery",
-    "selections": (v1/*: any*/)
+    "selections": [
+      {
+        "alias": null,
+        "args": (v1/*: any*/),
+        "concreteType": "Activity",
+        "kind": "LinkedField",
+        "name": "activities",
+        "plural": true,
+        "selections": [
+          (v2/*: any*/),
+          (v3/*: any*/),
+          {
+            "alias": null,
+            "args": null,
+            "kind": "ScalarField",
+            "name": "id",
+            "storageKey": null
+          }
+        ],
+        "storageKey": null
+      }
+    ]
   },
   "params": {
-    "cacheID": "eb42ecf63629bb178bfab46f5ad82e67",
+    "cacheID": "bcdc57875993c4efef7e38b5f783ec3b",
     "id": null,
     "metadata": {},
     "name": "HomeQuery",
     "operationKind": "query",
-    "text": "query HomeQuery(\n  $id: ID!\n) {\n  activity(id: $id) {\n    title\n    date\n    id\n  }\n}\n"
+    "text": "query HomeQuery(\n  $username: String!\n) {\n  activities(username: $username) {\n    title\n    date\n    ...Day_activity\n    id\n  }\n}\n\nfragment Day_activity on Activity {\n  date\n  title\n}\n"
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'ed9a3d9d81dd8c355dfc395d70df2a63';
+(node/*: any*/).hash = '4578b25d53726ebbe36f319c57ac5b38';
 
 module.exports = node;

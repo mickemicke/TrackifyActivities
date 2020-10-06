@@ -12,6 +12,11 @@ const ActivitySchema = mongoose.Schema({
   details: {}, // mixed type, mongoose doesn't auto detect changes, see docs
   title: String,
   body: String,
+  username: {
+    type: String,
+    required: true,
+  },
+});
 });
 
 module.exports = mongoose.model("Activities", ActivitySchema);
