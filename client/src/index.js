@@ -6,15 +6,14 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { StateProvider } from "./store";
 
-ReactDOM.render(
+ReactDOM.unstable_createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <StateProvider>
       <BrowserRouter>
         <App />
       </BrowserRouter>
     </StateProvider>
-  </React.StrictMode>,
-  document.getElementById("root")
+  </React.StrictMode>
 );
 
 // If you want your app to work offline and load faster, you can change
