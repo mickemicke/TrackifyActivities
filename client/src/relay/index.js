@@ -1,24 +1,15 @@
 import { Environment, Network, RecordSource, Store } from "relay-runtime";
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+import fetchGraphQL from "./fetchGraphQL";
 
-function fetchQuery(operation, variables) {
-  return fetch(`${API_BASE_URL}/graphql`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Credentials: "include",
-    },
-    body: JSON.stringify({
-      query: operation.text,
-      variables,
-    }),
-  }).then((response) => {
-    return response.json();
-  });
+async function fetchRelay(params, variables) {
+  console.log(
+    `fetching query ${params.name} with ${JSON.stringify(variables)}`
+  );
+  return fetchGraphQL(params.text, variables);
 }
 
 const environment = new Environment({
-  network: Network.create(fetchQuery),
+  network: Network.create(fetchRelay),
   store: new Store(new RecordSource()),
 });
 
