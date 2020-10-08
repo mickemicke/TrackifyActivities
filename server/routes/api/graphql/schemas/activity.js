@@ -1,13 +1,14 @@
 const graphql = require("graphql");
+const TagsType = require("./tags");
 
-const { GraphQLObjectType, GraphQLString, GraphQLID, GraphQLInt } = graphql;
+const { GraphQLObjectType, GraphQLString, GraphQLID, GraphQLList } = graphql;
 
 const ActivityType = new GraphQLObjectType({
   name: "Activity",
   fields: () => ({
     id: { type: GraphQLID },
     date: { type: GraphQLString },
-    tags: { type: GraphQLInt },
+    tags: { type: GraphQLList(TagsType) },
     createdAt: { type: GraphQLString },
     updatedAt: { type: GraphQLString },
     title: { type: GraphQLString },
