@@ -8,7 +8,7 @@
     "@testing-library/user-event": "^7.1.2",
     "dayjs": "^1.8.35",
     "get-graphql-schema": "^2.1.2",
-    "lodash": "^4.17.20",
+    "lodash": "^4.17.21",
     "modern-css-reset": "^1.1.1",
     "react": "0.0.0-experimental-94c0244ba",
     "react-dom": "0.0.0-experimental-94c0244ba",
